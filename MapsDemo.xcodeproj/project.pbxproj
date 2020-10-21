@@ -21,6 +21,8 @@
 		3CA3B49D2537638900C3C3E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CA3B49C2537638900C3C3E3 /* Assets.xcassets */; };
 		3CA3B4A02537638900C3C3E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CA3B49E2537638900C3C3E3 /* LaunchScreen.storyboard */; };
 		4827290CEED8142484C612E9 /* Pods_MapsDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509645DC0A74A09479897AE1 /* Pods_MapsDemo.framework */; };
+		DA0CC64B253FF3A200348D4D /* customAnnotationFromWeb.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0CC64A253FF3A200348D4D /* customAnnotationFromWeb.swift */; };
+		DA0CC65225408A7D00348D4D /* CustomAnnotaitonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0CC65125408A7D00348D4D /* CustomAnnotaitonView.swift */; };
 		DA96ABE6253F5552005CBCC7 /* GoogleMapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA96ABE5253F5552005CBCC7 /* GoogleMapsViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +45,8 @@
 		3CA3B4A12537638900C3C3E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		509645DC0A74A09479897AE1 /* Pods_MapsDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MapsDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7510BB1F3507397C8D35F429 /* Pods-MapsDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapsDemo.debug.xcconfig"; path = "Target Support Files/Pods-MapsDemo/Pods-MapsDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		DA0CC64A253FF3A200348D4D /* customAnnotationFromWeb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customAnnotationFromWeb.swift; sourceTree = "<group>"; };
+		DA0CC65125408A7D00348D4D /* CustomAnnotaitonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotaitonView.swift; sourceTree = "<group>"; };
 		DA96ABE5253F5552005CBCC7 /* GoogleMapsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,7 +118,6 @@
 			isa = PBXGroup;
 			children = (
 				3C50BDB9253A469D000E5C8A /* ViewModel */,
-				3C50BDB3253A380E000E5C8A /* Model */,
 			);
 			path = Locations;
 			sourceTree = "<group>";
@@ -124,6 +127,8 @@
 			children = (
 				3C50BDB4253A3826000E5C8A /* Place.swift */,
 				3C50BDBC253A4702000E5C8A /* CustomAnnotation.swift */,
+				DA0CC64A253FF3A200348D4D /* customAnnotationFromWeb.swift */,
+				DA0CC65125408A7D00348D4D /* CustomAnnotaitonView.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -140,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				3C50BDBA253A46B5000E5C8A /* LocationViewModel.swift */,
+				3C50BDB3253A380E000E5C8A /* Model */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -324,10 +330,12 @@
 				3CA3B4982537638700C3C3E3 /* ViewController.swift in Sources */,
 				3C50BDB5253A3826000E5C8A /* Place.swift in Sources */,
 				3C50BDB8253A393E000E5C8A /* ServiceManager.swift in Sources */,
+				DA0CC64B253FF3A200348D4D /* customAnnotationFromWeb.swift in Sources */,
 				DA96ABE6253F5552005CBCC7 /* GoogleMapsViewController.swift in Sources */,
 				3C1E1D672537959700665170 /* UIApplication+Ext.swift in Sources */,
 				3C50BDB1253A099E000E5C8A /* LocationHandler.swift in Sources */,
 				3CA3B4942537638700C3C3E3 /* AppDelegate.swift in Sources */,
+				DA0CC65225408A7D00348D4D /* CustomAnnotaitonView.swift in Sources */,
 				3C50BDBD253A4702000E5C8A /* CustomAnnotation.swift in Sources */,
 				3C50BDBB253A46B5000E5C8A /* LocationViewModel.swift in Sources */,
 				3CA3B4962537638700C3C3E3 /* SceneDelegate.swift in Sources */,

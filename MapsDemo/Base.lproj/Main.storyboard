@@ -18,15 +18,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8ml-62-deB">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="685"/>
                             </mapView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VsR-lJ-fzc">
+                                <rect key="frame" x="0.0" y="773" width="414" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="8s9-R8-PpK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="VsR-lJ-fzc" secondAttribute="trailing" id="3pt-UW-Oij"/>
+                            <constraint firstItem="VsR-lJ-fzc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Kba-Iu-hjE"/>
+                            <constraint firstItem="VsR-lJ-fzc" firstAttribute="top" secondItem="8ml-62-deB" secondAttribute="bottom" id="Zan-kT-mKK"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="VsR-lJ-fzc" secondAttribute="bottom" id="pCe-KE-8TP"/>
                             <constraint firstItem="8ml-62-deB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="pPo-KJ-FSP"/>
                             <constraint firstItem="8ml-62-deB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="tE6-Ow-hV1"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="8ml-62-deB" secondAttribute="bottom" id="uQe-Cf-rMB"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8ml-62-deB" secondAttribute="trailing" id="zyM-t2-GMX"/>
                         </constraints>
                     </view>
@@ -85,30 +97,46 @@
         <!--Google Maps-->
         <scene sceneID="VlY-mn-qxK">
             <objects>
-                <viewController id="aEn-Bf-cjS" sceneMemberID="viewController">
+                <viewController id="aEn-Bf-cjS" customClass="GoogleMapsViewController" customModule="MapsDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6Dk-nl-4iq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BJ8-CP-EqC">
-                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BJ8-CP-EqC" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="44" width="414" height="729"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VP6-iw-doI">
+                                <rect key="frame" x="0.0" y="773" width="414" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="wdU-sD-44A"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="KSW-b4-uyj"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="KSW-b4-uyj" firstAttribute="trailing" secondItem="VP6-iw-doI" secondAttribute="trailing" id="6jb-WU-pGK"/>
                             <constraint firstItem="KSW-b4-uyj" firstAttribute="trailing" secondItem="BJ8-CP-EqC" secondAttribute="trailing" id="Etd-ic-2HX"/>
+                            <constraint firstItem="VP6-iw-doI" firstAttribute="leading" secondItem="KSW-b4-uyj" secondAttribute="leading" id="Jxx-PY-Bji"/>
                             <constraint firstItem="BJ8-CP-EqC" firstAttribute="top" secondItem="KSW-b4-uyj" secondAttribute="top" id="Naf-cD-F1o"/>
-                            <constraint firstItem="KSW-b4-uyj" firstAttribute="bottom" secondItem="BJ8-CP-EqC" secondAttribute="bottom" id="eZd-ZP-nnr"/>
+                            <constraint firstItem="VP6-iw-doI" firstAttribute="top" secondItem="BJ8-CP-EqC" secondAttribute="bottom" id="Q3V-pE-cWX"/>
                             <constraint firstItem="BJ8-CP-EqC" firstAttribute="leading" secondItem="KSW-b4-uyj" secondAttribute="leading" id="rpP-hx-fqy"/>
+                            <constraint firstItem="KSW-b4-uyj" firstAttribute="bottom" secondItem="VP6-iw-doI" secondAttribute="bottom" id="vlr-u0-a1p"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Google Maps" selectedImage="map" catalog="system" id="kkA-Vl-Bi4"/>
+                    <connections>
+                        <outlet property="addressLabel" destination="VP6-iw-doI" id="EHj-Fy-vMl"/>
+                        <outlet property="googleMapView" destination="BJ8-CP-EqC" id="BEC-DV-ZcR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u2D-Yp-hb5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="471" y="950"/>
+            <point key="canvasLocation" x="469.56521739130437" y="949.55357142857133"/>
         </scene>
     </scenes>
     <resources>

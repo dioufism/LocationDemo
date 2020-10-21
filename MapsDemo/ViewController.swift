@@ -5,7 +5,6 @@
 //  Created by ousmane diouf on 10/20/20.
 //  Copyright © 2020 ExaData. All rights reserved.
 //
-
 import CoreLocation
 import MapKit
 import UIKit
@@ -24,12 +23,21 @@ class ViewController: UIViewController {
     lazy var locationHandler = LocationHandler(delegate: self)
     var dataSource: [MKAnnotation] = []
     
-    //MARK: LifeCycle Methods
+    //MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         locationHandler.getUserLocation()
         getData()
-    }
+        mapView.delegate = self
+        
+        self.mapView.register(
+            CustomAnnotaitonView.self,
+                  forAnnotationViewWithReuseIdentifier: "CustomAnnotaitonView")
+              
+              self.title = "Location Demo"
+          }
+        
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
@@ -44,23 +52,7 @@ class ViewController: UIViewController {
         searchController.searchBar.delegate =  self
         present(searchController, animated: true, completion: nil)
     }
-    
-    
     //MARK: - Helper
-//    func setupSearchRequest()  {
-//        searchRequest.naturalLanguageQuery = "enter your search here"
-//        searchRequest.region = mapView.region
-//        let search = MKLocalSearch(request: searchRequest)
-//        search.start { response, error in
-//            guard let response =  response else {
-//                print(" Error:\(error?.localizedDescription ?? "Unknown")")
-//                return
-//            }
-//            for item in response.mapItems {
-//                print(item.phoneNumber ?? "there is no number")
-//            }
-//        }
-//    }
     func setMapVisibleArea() {
         let coordintate = CLLocationCoordinate2D(latitude: 37.45634, longitude: -122.3456345) // self.mapView.userLocation.coordinate
         let radius = 1000.0
@@ -117,21 +109,22 @@ extension ViewController: MKMapViewDelegate {
         
         guard let annotation = annotation as? CustomAnnotation else { return nil }
         let view: MKMarkerAnnotationView
-        if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: "CustomAnnotation") as? MKMarkerAnnotationView {
+        if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: "CustomAnnotaitonView") as? MKMarkerAnnotationView {
             dequeuedView.annotation = annotation
             dequeuedView.canShowCallout = true
             dequeuedView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
             view = dequeuedView
         } else {
-            view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "CustomAnnotation")
+            view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "CustomAnnotaitonView")
             view.canShowCallout = true
             view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         }
         return view
     }
     
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) { // what happens when we select the annotation
     }
+    
 }
 extension ViewController: LocationHandlerDelegate {
     func received(location: CLLocation) {
@@ -151,11 +144,9 @@ extension ViewController: UISearchBarDelegate {
         activityIndicator.hidesWhenStopped =  true
         activityIndicator.startAnimating()
         self.view.addSubview(activityIndicator)
-        
         //hide searchbar
         searchBar.resignFirstResponder()
         dismiss(animated: true, completion: nil)
-        
         //search request
         let searchRequest = MKLocalSearch.Request()
         searchRequest.naturalLanguageQuery = searchBar.text
