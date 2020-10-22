@@ -29,7 +29,7 @@ class ViewController: UIViewController {
         locationHandler.getUserLocation()
         getData()
         mapView.delegate = self
-        
+    
         self.mapView.register(
             CustomAnnotaitonView.self,
                   forAnnotationViewWithReuseIdentifier: "CustomAnnotaitonView")
@@ -106,18 +106,17 @@ class ViewController: UIViewController {
 extension ViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        
         guard let annotation = annotation as? CustomAnnotation else { return nil }
-        let view: MKMarkerAnnotationView
-        if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: "CustomAnnotaitonView") as? MKMarkerAnnotationView {
-            dequeuedView.annotation = annotation
-            dequeuedView.canShowCallout = true
+        let view: MKAnnotationView?
+        if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: "CustomAnnotaitonView") {
+            //dequeuedView.annotation = annotation
+            //dequeuedView.canShowCallout = true
             dequeuedView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
             view = dequeuedView
         } else {
-            view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "CustomAnnotaitonView")
-            view.canShowCallout = true
-            view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            view = CustomAnnotaitonView(annotation: annotation, reuseIdentifier: "CustomAnnotaitonView")
+            view!.canShowCallout = true
+            view!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         }
         return view
     }

@@ -80,6 +80,7 @@ extension LocationHandler: CLLocationManagerDelegate {
         guard let location = locations.last else { return }
         locationManager.stopUpdatingLocation()
         delegate?.received(location: location)
+
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

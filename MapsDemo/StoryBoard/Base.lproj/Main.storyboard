@@ -68,7 +68,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="7oI-L7-OL8" kind="relationship" relationship="viewControllers" id="bBz-Su-OwZ"/>
-                        <segue destination="aEn-Bf-cjS" kind="relationship" relationship="viewControllers" id="LHg-z4-mbT"/>
+                        <segue destination="bGj-zi-cBO" kind="relationship" relationship="viewControllers" id="LHg-z4-mbT"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kC3-vI-E12" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -94,7 +94,7 @@
             </objects>
             <point key="canvasLocation" x="1805.7971014492755" y="118.52678571428571"/>
         </scene>
-        <!--Google Maps-->
+        <!--Google Maps View Controller-->
         <scene sceneID="VlY-mn-qxK">
             <objects>
                 <viewController id="aEn-Bf-cjS" customClass="GoogleMapsViewController" customModule="MapsDemo" customModuleProvider="target" sceneMemberID="viewController">
@@ -103,7 +103,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BJ8-CP-EqC" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="44" width="414" height="729"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="685"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VP6-iw-doI">
@@ -128,13 +128,80 @@
                             <constraint firstItem="KSW-b4-uyj" firstAttribute="bottom" secondItem="VP6-iw-doI" secondAttribute="bottom" id="vlr-u0-a1p"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Google Maps" selectedImage="map" catalog="system" id="kkA-Vl-Bi4"/>
+                    <navigationItem key="navigationItem" id="d17-gA-hTe">
+                        <barButtonItem key="rightBarButtonItem" title="Places" id="e8n-Mb-Rg4">
+                            <connections>
+                                <segue destination="oLc-Rr-P4d" kind="presentation" id="khD-cG-xjp"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="addressLabel" destination="VP6-iw-doI" id="EHj-Fy-vMl"/>
                         <outlet property="googleMapView" destination="BJ8-CP-EqC" id="BEC-DV-ZcR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u2D-Yp-hb5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1379.7101449275362" y="949.55357142857133"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="HHp-kc-cpH">
+            <objects>
+                <tableViewController id="oLc-Rr-P4d" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="pN7-Hf-B1o">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="82" id="4rM-if-wrc">
+                                <rect key="frame" x="0.0" y="28" width="414" height="82"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4rM-if-wrc" id="gYH-rB-2cI">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="82"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ieC-Dx-KxC">
+                                            <rect key="frame" x="32" y="31" width="350" height="20"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="ieC-Dx-KxC" secondAttribute="trailing" constant="12" id="X7E-7w-aTf"/>
+                                        <constraint firstItem="ieC-Dx-KxC" firstAttribute="leading" secondItem="gYH-rB-2cI" secondAttribute="leadingMargin" constant="12" id="cKr-GM-B6B"/>
+                                        <constraint firstItem="ieC-Dx-KxC" firstAttribute="top" secondItem="gYH-rB-2cI" secondAttribute="topMargin" constant="20" id="fge-hP-41D"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="ieC-Dx-KxC" secondAttribute="bottom" constant="20" id="uIN-TJ-stK"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="oLc-Rr-P4d" id="fuc-Yp-stP"/>
+                            <outlet property="delegate" destination="oLc-Rr-P4d" id="6lR-ni-Nzu"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="56Q-Im-5zH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2256.521739130435" y="949.55357142857133"/>
+        </scene>
+        <!--Google Maps-->
+        <scene sceneID="QAH-Qg-Rat">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bGj-zi-cBO" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Google Maps" selectedImage="map" catalog="system" id="kkA-Vl-Bi4"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="I3p-JB-zTl">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="aEn-Bf-cjS" kind="relationship" relationship="rootViewController" id="tt5-ZZ-tp6"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q8e-ah-djb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="469.56521739130437" y="949.55357142857133"/>
         </scene>

@@ -15,13 +15,17 @@ class GoogleMapsViewController: UIViewController {
     @IBOutlet weak var addressLabel: UILabel!
     //MARK: - Class Variables
     let locationManager = CLLocationManager()
+    private var searchedTypes = ["bakery", "bar", "cafe", "grocery_or_supermarket", "restaurant"]
+    let dataProvider = GoogleDataProvider()
+    let searchRadius: Double = 1000
+    //MARK: LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.delegate = self
         googleMapView.delegate = self
         requestUserLocation(locationManager: locationManager, mapView: googleMapView)
     }
-    
+    //MARK: Helper Function
     func reverseGeocode(coordinate: CLLocationCoordinate2D) {
         let geocoder = GMSGeocoder()
         geocoder.reverseGeocodeCoordinate(coordinate) { response, error in
@@ -44,6 +48,31 @@ class GoogleMapsViewController: UIViewController {
           bottom: labelHeight,
           right: 0)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+      guard
+        let navigationController = segue.destination as? UINavigationController,
+        let controller = navigationController.topViewController as? TypesTableViewController
+        else {
+          return
+      }
+      controller.selectedTypes = searchedTypes
+      controller.delegate = self
+    }
+    //MARK: Helper Function 2
+    func fetchPlaces(near coordinate: CLLocationCoordinate2D){
+        googleMapView.clear()
+      dataProvider.fetchPlaces(
+        near: coordinate,
+        radius:searchRadius,
+        types: searchedTypes
+      ) { places in
+        places.forEach { place in
+          let marker = PlaceMarker(place: place, availableTypes: self.searchedTypes)
+          marker.map = self.googleMapView
+        }
+      }
+    }
 }
 //MARK: Helper Function
 func requestUserLocation(locationManager: CLLocationManager, mapView: GMSMapView) {
@@ -55,6 +84,7 @@ func requestUserLocation(locationManager: CLLocationManager, mapView: GMSMapView
         locationManager.requestWhenInUseAuthorization()
     }
 }
+
 //MARK: - Extentions
 extension GoogleMapsViewController: CLLocationManagerDelegate {
     
@@ -76,6 +106,8 @@ extension GoogleMapsViewController: CLLocationManagerDelegate {
             zoom: 15,
             bearing: 0,
             viewingAngle: 0)
+        fetchPlaces(near: location.coordinate)
+
     }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
@@ -86,4 +118,12 @@ extension GoogleMapsViewController: GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
       reverseGeocode(coordinate: position.target)
     }
+}
+// MARK: - TypesTableViewControllerDelegate
+extension GoogleMapsViewController: TypesTableViewControllerDelegate {
+  func typesController(_ controller: TypesTableViewController, didSelectTypes types: [String]) {
+    searchedTypes = controller.selectedTypes.sorted()
+    dismiss(animated: true)
+    fetchPlaces(near: googleMapView.camera.target)
+  }
 }
