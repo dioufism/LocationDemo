@@ -7,13 +7,12 @@
 //
 
 import UIKit
-
+ //MARK: TypeProtocolHandler
 protocol TypesTableViewControllerDelegate: class {
   func typesController(_ controller: TypesTableViewController, didSelectTypes types: [String])
 }
-
 class TypesTableViewController: UITableViewController {
-  private let TypesDictionary = ["bakery": "Bakery", "bar": "Bar", "cafe": "Cafe", "grocery_or_supermarket": "Supermarket", "restaurant": "Restaurant"]
+  private let TypesDictionary = ["bakery": "Bakery", "bar": "Bar", "cafe": "Cafe", "grocery": "Supermarket", "restaurant": "Restaurant"]
   
   private var sortedKeys: [String] {
     return TypesDictionary.keys.sorted()
@@ -22,20 +21,17 @@ class TypesTableViewController: UITableViewController {
   weak var delegate: TypesTableViewControllerDelegate?
   var selectedTypes: [String] = []
 }
-
-// MARK - Actions
+//MARK - Actions
 extension TypesTableViewController {
   @IBAction func donePressed(_ sender: AnyObject) {
     delegate?.typesController(self, didSelectTypes: selectedTypes)
   }
 }
-
-// MARK - UITableView Delegate & Datasource
+//MARK - UITableView Delegate & Datasource
 extension TypesTableViewController {
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return TypesDictionary.count
   }
-  
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "TypeCell", for: indexPath)
     let key = sortedKeys[indexPath.row]
@@ -45,7 +41,6 @@ extension TypesTableViewController {
     cell.accessoryType = selectedTypes.contains(key) ? .checkmark : .none
     return cell
   }
-  
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
     let key = sortedKeys[indexPath.row]
@@ -54,7 +49,6 @@ extension TypesTableViewController {
     } else {
       selectedTypes.append(key)
     }
-    
     tableView.reloadData()
   }
 }

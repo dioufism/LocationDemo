@@ -117,7 +117,10 @@ extension ViewController: MKMapViewDelegate {
             view = CustomAnnotaitonView(annotation: annotation, reuseIdentifier: "CustomAnnotaitonView")
             view!.canShowCallout = true
             view!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        
         }
+        /// I mage wasn't  set  reason why it was not showing
+        view?.image = UIImage(named: "user_location")
         return view
     }
     

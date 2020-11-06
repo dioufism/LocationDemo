@@ -92,7 +92,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xok-ow-znf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1805.7971014492755" y="118.52678571428571"/>
+            <point key="canvasLocation" x="1548" y="119"/>
         </scene>
         <!--Google Maps View Controller-->
         <scene sceneID="VlY-mn-qxK">
@@ -129,9 +129,14 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="d17-gA-hTe">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="arrow.clockwise" catalog="system" id="LQx-YD-NHX">
+                            <connections>
+                                <action selector="refreshPlaces:" destination="aEn-Bf-cjS" id="JpX-S8-L4f"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Places" id="e8n-Mb-Rg4">
                             <connections>
-                                <segue destination="oLc-Rr-P4d" kind="presentation" id="khD-cG-xjp"/>
+                                <segue destination="zt1-kA-Bac" kind="presentation" id="khD-cG-xjp"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -144,35 +149,21 @@
             </objects>
             <point key="canvasLocation" x="1379.7101449275362" y="949.55357142857133"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Types Table View Controller-->
         <scene sceneID="HHp-kc-cpH">
             <objects>
-                <tableViewController id="oLc-Rr-P4d" sceneMemberID="viewController">
+                <tableViewController id="oLc-Rr-P4d" customClass="TypesTableViewController" customModule="MapsDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="pN7-Hf-B1o">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="82" id="4rM-if-wrc">
-                                <rect key="frame" x="0.0" y="28" width="414" height="82"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TypeCell" rowHeight="95" id="4rM-if-wrc">
+                                <rect key="frame" x="0.0" y="28" width="414" height="95"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4rM-if-wrc" id="gYH-rB-2cI">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="82"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="95"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ieC-Dx-KxC">
-                                            <rect key="frame" x="32" y="31" width="350" height="20"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="trailingMargin" secondItem="ieC-Dx-KxC" secondAttribute="trailing" constant="12" id="X7E-7w-aTf"/>
-                                        <constraint firstItem="ieC-Dx-KxC" firstAttribute="leading" secondItem="gYH-rB-2cI" secondAttribute="leadingMargin" constant="12" id="cKr-GM-B6B"/>
-                                        <constraint firstItem="ieC-Dx-KxC" firstAttribute="top" secondItem="gYH-rB-2cI" secondAttribute="topMargin" constant="20" id="fge-hP-41D"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="ieC-Dx-KxC" secondAttribute="bottom" constant="20" id="uIN-TJ-stK"/>
-                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -181,10 +172,17 @@
                             <outlet property="delegate" destination="oLc-Rr-P4d" id="6lR-ni-Nzu"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="dGb-V1-CTH">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="Afe-01-m8d">
+                            <connections>
+                                <action selector="donePressed:" destination="oLc-Rr-P4d" id="leM-V6-73h"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="56Q-Im-5zH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2256.521739130435" y="949.55357142857133"/>
+            <point key="canvasLocation" x="3166.666666666667" y="949.55357142857133"/>
         </scene>
         <!--Google Maps-->
         <scene sceneID="QAH-Qg-Rat">
@@ -205,8 +203,27 @@
             </objects>
             <point key="canvasLocation" x="469.56521739130437" y="949.55357142857133"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="KJt-FG-eB3">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zt1-kA-Bac" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="O2Y-wA-3cV">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="oLc-Rr-P4d" kind="relationship" relationship="rootViewController" id="pjG-O0-HiY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Lw-Hg-Tts" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2256.521739130435" y="949.55357142857133"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="arrow.clockwise" catalog="system" width="115" height="128"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="map" catalog="system" width="128" height="110"/>
         <image name="mappin.circle" catalog="system" width="128" height="121"/>

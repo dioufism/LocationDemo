@@ -21,8 +21,8 @@ class GoogleDataProvider {
   private var session: URLSession {
     return URLSession.shared
   }
-
-  func fetchPlaces(
+    //MARK: - Helper Functions
+  func fetchPlaces( // fetches the different places from the GoogleMap Place API
     near coordinate: CLLocationCoordinate2D,
     radius: Double,
     types:[String],
@@ -39,7 +39,7 @@ class GoogleDataProvider {
     }
     
     if let task = placesTask, task.taskIdentifier > 0 && task.state == .running {
-      task.cancel()
+      task.cancel() // frees allocated ressources after the task is done
     }
     
     placesTask = session.dataTask(with: url) { data, response, _ in
@@ -51,7 +51,7 @@ class GoogleDataProvider {
       }
       let decoder = JSONDecoder()
       decoder.keyDecodingStrategy = .convertFromSnakeCase
-      guard let placesResponse = try? decoder.decode(GooglePlace.Response.self, from: data) else {
+      guard let placesResponse = try? decoder.decode(GooglePlace.Response.self, from: data) else { // Decoding the JSON Response from the API
         DispatchQueue.main.async {
           completion([])
         }

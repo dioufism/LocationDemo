@@ -10,7 +10,7 @@ import UIKit
 import GoogleMaps
 class PlaceMarker: GMSMarker {
       let place: GooglePlace
-      init(place: GooglePlace, availableTypes: [String]) {
+      init(place: GooglePlace, availableTypes: [String]) { //designated init with location types
         self.place = place
         super.init()
         position = place.coordinate
@@ -19,7 +19,7 @@ class PlaceMarker: GMSMarker {
         var foundType = "restaurant"
         let possibleTypes = availableTypes.count > 0 ?
           availableTypes :
-          ["bakery", "bar", "cafe", "grocery_or_supermarket", "restaurant"]
+          ["bakery", "bar", "cafe", "grocery", "restaurant"]
         for type in place.types {
           if possibleTypes.contains(type) {
             foundType = type

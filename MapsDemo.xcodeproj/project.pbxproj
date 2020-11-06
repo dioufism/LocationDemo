@@ -125,6 +125,7 @@
 		3C50BDB2253A37FA000E5C8A /* Locations */ = {
 			isa = PBXGroup;
 			children = (
+				DA0CC6772541EA9300348D4D /* Controller */,
 				3C50BDB9253A469D000E5C8A /* ViewModel */,
 			);
 			path = Locations;
@@ -223,6 +224,13 @@
 			children = (
 				DA96ABE5253F5552005CBCC7 /* GoogleMapsViewController.swift */,
 				DA0CC6732541D85500348D4D /* TypesTableViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		DA0CC6772541EA9300348D4D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			path = Controller;
 			sourceTree = "<group>";

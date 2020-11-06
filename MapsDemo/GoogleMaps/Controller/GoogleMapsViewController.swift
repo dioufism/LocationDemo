@@ -15,17 +15,17 @@ class GoogleMapsViewController: UIViewController {
     @IBOutlet weak var addressLabel: UILabel!
     //MARK: - Class Variables
     let locationManager = CLLocationManager()
-    private var searchedTypes = ["bakery", "bar", "cafe", "grocery_or_supermarket", "restaurant"]
+    private var searchedTypes = ["bakery", "bar", "cafe", "grocery", "restaurant"]
     let dataProvider = GoogleDataProvider()
     let searchRadius: Double = 1000
-    //MARK: LifeCycle Methods
+    //MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.delegate = self
         googleMapView.delegate = self
-        requestUserLocation(locationManager: locationManager, mapView: googleMapView)
+        requestUserLocation(locationManager: locationManager, googleMapView: googleMapView)
     }
-    //MARK: Helper Function
+    //MARK: - Helper Function
     func reverseGeocode(coordinate: CLLocationCoordinate2D) {
         let geocoder = GMSGeocoder()
         geocoder.reverseGeocodeCoordinate(coordinate) { response, error in
@@ -48,7 +48,7 @@ class GoogleMapsViewController: UIViewController {
           bottom: labelHeight,
           right: 0)
     }
-    
+    //MARK: - Segway
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
       guard
         let navigationController = segue.destination as? UINavigationController,
@@ -59,7 +59,7 @@ class GoogleMapsViewController: UIViewController {
       controller.selectedTypes = searchedTypes
       controller.delegate = self
     }
-    //MARK: Helper Function 2
+    //MARK: - Helper Function 2
     func fetchPlaces(near coordinate: CLLocationCoordinate2D){
         googleMapView.clear()
       dataProvider.fetchPlaces(
@@ -74,22 +74,19 @@ class GoogleMapsViewController: UIViewController {
       }
     }
 }
-//MARK: Helper Function
-func requestUserLocation(locationManager: CLLocationManager, mapView: GMSMapView) {
+//MARK: - Helper Function
+func requestUserLocation(locationManager: CLLocationManager, googleMapView: GMSMapView) {
     if CLLocationManager.locationServicesEnabled() {
         locationManager.requestLocation()
-        mapView.isMyLocationEnabled = true
-        mapView.settings.myLocationButton = true
+        googleMapView.isMyLocationEnabled = true
+        googleMapView.settings.myLocationButton = true
     } else {
         locationManager.requestWhenInUseAuthorization()
     }
 }
-
 //MARK: - Extentions
 extension GoogleMapsViewController: CLLocationManagerDelegate {
-    
     func locationManager(_ manager: CLLocationManager,didChangeAuthorization status: CLAuthorizationStatus) {
-        
         guard status == .authorizedWhenInUse else {
             return
         }
@@ -107,7 +104,6 @@ extension GoogleMapsViewController: CLLocationManagerDelegate {
             bearing: 0,
             viewingAngle: 0)
         fetchPlaces(near: location.coordinate)
-
     }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
@@ -124,6 +120,12 @@ extension GoogleMapsViewController: TypesTableViewControllerDelegate {
   func typesController(_ controller: TypesTableViewController, didSelectTypes types: [String]) {
     searchedTypes = controller.selectedTypes.sorted()
     dismiss(animated: true)
+    fetchPlaces(near: googleMapView.camera.target)
+  }
+}
+//MARK: - Class Action Buttons
+extension GoogleMapsViewController {
+  @IBAction func refreshPlaces(_ sender: Any) {
     fetchPlaces(near: googleMapView.camera.target)
   }
 }

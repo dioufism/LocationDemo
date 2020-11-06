@@ -9,13 +9,12 @@
 import CoreLocation
 import UIKit
 
-protocol LocationHandlerDelegate: AlertProtocol {
+protocol LocationHandlerDelegate: AnyObject, AlertProtocol {
     func received(location: CLLocation)
     func locationDidFail(withError error: Error)
 }
 
 class LocationHandler: NSObject {
-    
     private lazy var locationManager: CLLocationManager = {
         let locationM = CLLocationManager()
         locationM.delegate = self
@@ -76,11 +75,9 @@ class LocationHandler: NSObject {
 extension LocationHandler: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
         guard let location = locations.last else { return }
         locationManager.stopUpdatingLocation()
         delegate?.received(location: location)
-
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
