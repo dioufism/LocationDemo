@@ -8,7 +8,6 @@
 
 import CoreLocation
 import UIKit
-
 protocol LocationHandlerDelegate: AnyObject, AlertProtocol {
     func received(location: CLLocation)
     func locationDidFail(withError error: Error)
